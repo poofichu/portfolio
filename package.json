@@ -42,5 +42,10 @@
     "url-loader": "^0.6.2",
     "webpack": "3.10.0",
     "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "@ibm/plex": "^1.0.1",
+    "autoprefixer": "^8.2.0",
+    "gulp-sass": "^4.0.1"
   }
 }

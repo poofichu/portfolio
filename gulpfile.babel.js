@@ -3,6 +3,8 @@ import {spawn} from "child_process";
 import hugoBin from "hugo-bin";
 import gutil from "gulp-util";
 import flatten from "gulp-flatten";
+import autoprefixer from "autoprefixer";
+import sass from "gulp-sass";
 import postcss from "gulp-postcss";
 import cssImport from "postcss-import";
 import cssnext from "postcss-cssnext";
@@ -26,8 +28,13 @@ gulp.task("build-preview", ["css", "js", "fonts"], (cb) => buildSite(cb, hugoArg
 
 // Compile CSS with PostCSS
 gulp.task("css", () => (
-  gulp.src("./src/css/*.css")
-    .pipe(postcss([cssImport({from: "./src/css/main.css"}), cssnext()]))
+  gulp.src("./src/scss/*.scss")
+    .pipe(sass({
+      outputStyle:  "nested",
+      precision: 10,
+      includePaths: ["node_modules"],
+    }))
+    .pipe(postcss([ autoprefixer() ]))
     .pipe(gulp.dest("./dist/css"))
     .pipe(browserSync.stream())
 ));
